@@ -5,62 +5,86 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     name: 'Fried Blue Corn & Pecan Hushpuppies',
     description: 'Sweet potato mole, crème fraîche',
+    price: '$14',
     category: 'Starter',
-    imageUrl: 'https://picsum.photos/seed/hushpuppies/600/400'
+    imageUrl: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=800&q=80'
   },
   {
     name: 'Crab Fingers',
     description: 'Curry leaf, leche de tigre, smoked chili oil',
+    price: '$18',
     category: 'Starter',
-    imageUrl: 'https://picsum.photos/seed/crab/600/400'
+    imageUrl: 'https://images.unsplash.com/photo-1551248429-40975aa4de74?auto=format&fit=crop&w=800&q=80'
   },
   {
     name: 'Big Tree Oysters',
     description: 'Chili mignonette, pickled shallots',
+    price: '$22',
     category: 'Starter',
-    imageUrl: 'https://picsum.photos/seed/oysters/600/400'
+    imageUrl: 'https://images.unsplash.com/photo-1599481238332-b01e87afccff?auto=format&fit=crop&w=800&q=80'
   },
   {
     name: 'Bulgogi Beef Tartare',
     description: 'Apple kimchi, potato chips',
+    price: '$19',
     category: 'Starter',
-    imageUrl: 'https://picsum.photos/seed/tartare/600/400'
+    imageUrl: 'https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&w=800&q=80'
   },
   {
     name: 'Seared Whole Fish',
     description: 'Blue crab salad & Goan crab curry',
+    price: '$42',
     category: 'Main',
-    imageUrl: 'https://picsum.photos/seed/fish/600/400'
+    imageUrl: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80'
   },
   {
     name: 'Roasted Half Chicken',
     description: 'Chili lime butter & gremolata',
+    price: '$34',
     category: 'Main',
-    imageUrl: 'https://picsum.photos/seed/chicken/600/400'
+    imageUrl: 'https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=800&q=80'
   },
   {
     name: '10oz Seared Picanha Steak',
     description: 'Mojo de ajo & roasted potatoes',
+    price: '$48',
     category: 'Main',
-    imageUrl: 'https://picsum.photos/seed/steak/600/400'
+    imageUrl: 'https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=800&q=80'
   },
   {
     name: 'Tangerine Almond Cake',
     description: 'Lightly citrus-scented almond sponge',
+    price: '$12',
     category: 'Dessert',
-    imageUrl: 'https://picsum.photos/seed/cake/600/400'
+    imageUrl: 'https://images.unsplash.com/photo-1519915028121-7d3463d20b13?auto=format&fit=crop&w=800&q=80'
   },
   {
     name: 'Fried Apple Hand Pie',
     description: 'Warm, spiced apple filling with a crisp crust',
+    price: '$11',
     category: 'Dessert',
-    imageUrl: 'https://picsum.photos/seed/pie/600/400'
+    imageUrl: 'https://images.unsplash.com/photo-1535927082727-1b28b99aae7d?auto=format&fit=crop&w=800&q=80'
   },
   {
     name: 'Caramelized Banana Pudding',
     description: 'A modern twist on a classic Southern favorite',
+    price: '$12',
     category: 'Dessert',
-    imageUrl: 'https://picsum.photos/seed/pudding/600/400'
+    imageUrl: 'https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    name: 'Como La Flor',
+    description: 'Hibiscus-infused gin, lavender, lemon, sparkling rose',
+    price: '$16',
+    category: 'Drink',
+    imageUrl: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    name: 'Smoking Gun',
+    description: 'Mezcal, charred grapefruit, black salt, agave',
+    price: '$17',
+    category: 'Drink',
+    imageUrl: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=800&q=80'
   }
 ];
 
@@ -107,16 +131,16 @@ export const EVENTS: EventHighlight[] = [
   {
     title: "Robert Sinskey Wine Dinner",
     description: "An evening of Napa Valley elegance paired with seasonal Texas fare.",
-    imageUrl: "https://picsum.photos/seed/event1/800/600"
+    imageUrl: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80"
   },
   {
     title: "Beefsteak Dinner",
     description: "A traditional communal feast celebrating prime cuts and conviviality.",
-    imageUrl: "https://picsum.photos/seed/event2/800/600"
+    imageUrl: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80"
   },
   {
     title: "Texas Table: Feast for a Cause",
     description: "A charity event supporting local agricultural communities.",
-    imageUrl: "https://picsum.photos/seed/event3/800/600"
+    imageUrl: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=800&q=80"
   }
 ];

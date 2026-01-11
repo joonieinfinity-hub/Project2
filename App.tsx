@@ -1,86 +1,125 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import { MENU_ITEMS, TESTIMONIALS, CSR_TIERS, EVENTS } from './constants';
 import { MenuItem, CSRTier, EventHighlight } from './types';
 
 const App: React.FC = () => {
+  const [activeGalleryIndex, setActiveGalleryIndex] = useState(0);
+  const galleryImages = [
+    "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1550966842-28a1a2ca4a5c?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1534422298391-e4f8c170db0f?auto=format&fit=crop&w=1200&q=80"
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveGalleryIndex((prev) => (prev + 1) % galleryImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white min-h-screen text-lenoir-dark selection:bg-lenoir-gold selection:text-lenoir-dark">
       <Navbar />
 
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://picsum.photos/seed/lenoir-hero/1920/1080" 
-            alt="Lenoir Dining Room" 
-            className="w-full h-full object-cover scale-105"
+            src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1920&q=80" 
+            alt="Lenoir Wine Garden" 
+            className="w-full h-full object-cover animate-slow-zoom"
           />
-          <div className="absolute inset-0 bg-black/50 bg-gradient-to-t from-black/80 to-transparent"></div>
+          <div className="absolute inset-0 bg-black/40 bg-gradient-to-b from-black/60 via-transparent to-black/80"></div>
         </div>
         
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <div className="mb-6 inline-block px-4 py-2 border border-lenoir-gold/50 rounded-full backdrop-blur-md">
-            <span className="text-lenoir-gold text-xs uppercase tracking-[0.3em] font-semibold">
+        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+          <div className="mb-8 inline-flex items-center gap-3 px-5 py-2 border border-white/20 rounded-full backdrop-blur-md bg-white/5">
+            <span className="w-2 h-2 rounded-full bg-lenoir-gold animate-pulse"></span>
+            <span className="text-white text-[10px] uppercase tracking-[0.4em] font-semibold">
               Featured in MICHELIN Guide
             </span>
           </div>
-          <h1 className="text-5xl md:text-8xl text-white font-serif mb-6 leading-tight">
-            Lenoir — Exceptional <br/> <span className="italic">Seasonal Dining</span>
+          <h1 className="text-5xl md:text-[7rem] text-white font-serif mb-8 leading-[1.1] drop-shadow-2xl">
+            Exceptional <span className="italic">Seasonal</span> <br className="hidden md:block"/> Dining & Curated Wine
           </h1>
-          <p className="text-lg md:text-xl text-white/90 font-light mb-10 max-w-2xl mx-auto leading-relaxed">
-            A farm-to-table culinary destination celebrating local Texas ingredients, bold flavor, and hospitality in a relaxed wine garden setting.
+          <p className="text-lg md:text-2xl text-white/90 font-light mb-12 max-w-3xl mx-auto leading-relaxed font-serif italic">
+            Celebrating local Texas ingredients, bold flavor, and hospitality in Austin's most intimate wine garden setting.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="bg-lenoir-gold text-lenoir-dark px-10 py-4 text-xs uppercase tracking-widest font-bold hover:bg-white transition-colors w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <button className="bg-lenoir-gold text-lenoir-dark px-12 py-5 text-xs uppercase tracking-[0.2em] font-black hover:bg-white transition-all transform hover:-translate-y-1 shadow-xl w-full sm:w-auto">
               Reserve a Table
             </button>
-            <button className="border border-white text-white px-10 py-4 text-xs uppercase tracking-widest font-bold hover:bg-white hover:text-lenoir-dark transition-all w-full sm:w-auto">
+            <button className="backdrop-blur-md border border-white/40 text-white px-12 py-5 text-xs uppercase tracking-[0.2em] font-black hover:bg-white hover:text-lenoir-dark transition-all transform hover:-translate-y-1 w-full sm:w-auto">
               View Menu
             </button>
-            <button className="text-white text-xs uppercase tracking-widest font-bold underline underline-offset-8 hover:text-lenoir-gold transition-colors py-4">
-              Join Wine Club
+            <button className="text-white text-xs uppercase tracking-[0.3em] font-bold border-b-2 border-lenoir-gold/50 hover:border-lenoir-gold transition-all py-2 mt-4 sm:mt-0">
+              Join the Wine Club
             </button>
           </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-24 bg-lenoir-earth">
+      <section id="about" className="py-32 bg-lenoir-earth">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
-              <span className="text-lenoir-burgundy text-xs uppercase tracking-widest font-bold">The Story</span>
-              <h2 className="text-5xl font-serif text-lenoir-dark leading-tight">
-                About <span className="italic">Lenoir</span>
-              </h2>
-              <p className="text-lg text-gray-700 leading-relaxed font-light">
-                Lenoir is named after a hearty grape growing across the Texas Hill Country — a tribute to the land’s bounty. Since opening in 2012, chef-owners Todd Duplechan and Jessica Maher have crafted a seasonal, warm-weather cuisine inspired by local ingredients and global techniques.
-              </p>
-              <p className="text-lg text-gray-700 leading-relaxed font-light">
-                At Lenoir, food is thoughtfully prepared with spice, heat, and robust flavor and served alongside an extraordinary selection of wines from grower-producers worldwide.
-              </p>
+          <div className="grid lg:grid-cols-2 gap-24 items-center">
+            <div className="space-y-10 order-2 lg:order-1">
+              <header>
+                <span className="text-lenoir-burgundy text-xs uppercase tracking-[0.3em] font-black mb-4 block">The Land's Bounty</span>
+                <h2 className="text-6xl font-serif text-lenoir-dark leading-tight">
+                  Named for a <span className="italic">Hearty Grape</span>
+                </h2>
+              </header>
+              <div className="space-y-6 text-xl text-gray-700 leading-relaxed font-light font-serif">
+                <p>
+                  Lenoir is a tribute to the Texas Hill Country — a resilient grape that thrives in our local terroir. Since 2012, chef-owners Todd Duplechan and Jessica Maher have crafted a seasonal, warm-weather cuisine that bridges global techniques with the robust soul of Texas.
+                </p>
+                <p>
+                  Our food is thoughtfully prepared with spice, heat, and bold acidity, designed to pair perfectly with an extraordinary selection of wines from independent grower-producers worldwide.
+                </p>
+              </div>
               
-              <div className="grid grid-cols-2 gap-8 pt-8">
-                <div>
-                  <img src="https://picsum.photos/seed/todd/200/200" alt="Todd Duplechan" className="w-20 h-20 rounded-full mb-4 object-cover" />
-                  <h4 className="font-serif text-xl mb-1">Todd Duplechan</h4>
-                  <p className="text-xs text-gray-500 uppercase tracking-widest">Chef-Owner</p>
+              <div className="grid grid-cols-2 gap-12 pt-10 border-t border-lenoir-gold/20">
+                <div className="group cursor-pointer">
+                  <div className="overflow-hidden rounded-full w-24 h-24 mb-6 ring-4 ring-white shadow-lg transition-transform group-hover:scale-105">
+                    <img src="https://images.unsplash.com/photo-1583394838336-acd977730f90?auto=format&fit=crop&w=400&q=80" alt="Todd Duplechan" className="w-full h-full object-cover" />
+                  </div>
+                  <h4 className="font-serif text-2xl mb-1">Todd Duplechan</h4>
+                  <p className="text-[10px] text-lenoir-burgundy uppercase tracking-widest font-bold">Chef-Owner</p>
                 </div>
-                <div>
-                  <img src="https://picsum.photos/seed/jessica/200/200" alt="Jessica Maher" className="w-20 h-20 rounded-full mb-4 object-cover" />
-                  <h4 className="font-serif text-xl mb-1">Jessica Maher</h4>
-                  <p className="text-xs text-gray-500 uppercase tracking-widest">Chef-Owner</p>
+                <div className="group cursor-pointer">
+                  <div className="overflow-hidden rounded-full w-24 h-24 mb-6 ring-4 ring-white shadow-lg transition-transform group-hover:scale-105">
+                    <img src="https://images.unsplash.com/photo-1595273670150-db0a3d39074c?auto=format&fit=crop&w=400&q=80" alt="Jessica Maher" className="w-full h-full object-cover" />
+                  </div>
+                  <h4 className="font-serif text-2xl mb-1">Jessica Maher</h4>
+                  <p className="text-[10px] text-lenoir-burgundy uppercase tracking-widest font-bold">Chef-Owner</p>
                 </div>
               </div>
             </div>
-            <div className="relative">
-              <div className="aspect-[4/5] overflow-hidden rounded-sm shadow-2xl">
-                <img src="https://picsum.photos/seed/lenoir-dining/800/1000" alt="Lenoir Interior" className="w-full h-full object-cover" />
+
+            <div className="relative order-1 lg:order-2">
+              <div className="aspect-[4/5] overflow-hidden rounded-lg shadow-2xl relative">
+                {galleryImages.map((img, i) => (
+                  <img 
+                    key={i}
+                    src={img} 
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${i === activeGalleryIndex ? 'opacity-100' : 'opacity-0'}`}
+                    alt="Lenoir Gallery"
+                  />
+                ))}
+                <div className="absolute bottom-8 right-8 flex gap-2">
+                  {galleryImages.map((_, i) => (
+                    <div key={i} className={`w-2 h-2 rounded-full border border-white transition-all ${i === activeGalleryIndex ? 'bg-white w-6' : 'bg-transparent opacity-50'}`} />
+                  ))}
+                </div>
               </div>
-              <div className="absolute -bottom-8 -left-8 w-64 h-64 overflow-hidden rounded-sm shadow-2xl hidden lg:block">
-                <img src="https://picsum.photos/seed/seasonal-dish/500/500" alt="Seasonal Dish" className="w-full h-full object-cover" />
+              <div className="absolute -bottom-12 -left-12 w-72 h-72 hidden xl:block animate-float">
+                <div className="w-full h-full p-3 bg-white shadow-2xl rounded-sm rotate-3 transform hover:rotate-0 transition-transform duration-500">
+                  <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=600&q=80" alt="Wine Pour" className="w-full h-full object-cover rounded-sm" />
+                </div>
               </div>
             </div>
           </div>
@@ -88,35 +127,40 @@ const App: React.FC = () => {
       </section>
 
       {/* Menu Highlights Section */}
-      <section id="menu" className="py-24 bg-white">
+      <section id="menu" className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
-            <span className="text-lenoir-burgundy text-xs uppercase tracking-widest font-bold">A Taste of the Season</span>
-            <h2 className="text-5xl font-serif text-lenoir-dark mt-4 mb-6">Our Menu</h2>
-            <p className="max-w-2xl mx-auto text-gray-600 font-light">
-              Showcasing innovative seasonal à la carte offerings focusing on locally sourced ingredients, thoughtful preparations, and bold flavors.
+          <div className="text-center mb-24 max-w-3xl mx-auto">
+            <span className="text-lenoir-burgundy text-xs uppercase tracking-[0.4em] font-black">Current Offerings</span>
+            <h2 className="text-6xl font-serif text-lenoir-dark mt-6 mb-8">Our <span className="italic">Menu</span></h2>
+            <p className="text-lg text-gray-500 font-light leading-relaxed italic font-serif">
+              A rotating, farm-to-table à la carte selection celebrating the vibrant flavors of the warm-weather seasons.
             </p>
           </div>
 
-          <div className="space-y-24">
-            {(['Starter', 'Main', 'Dessert'] as const).map(category => (
+          <div className="space-y-32">
+            {(['Starter', 'Main', 'Dessert', 'Drink'] as const).map(category => (
               <div key={category}>
-                <h3 className="text-3xl font-serif text-lenoir-burgundy mb-10 border-b border-gray-100 pb-4 flex items-baseline gap-4">
-                  {category}s
-                  <span className="text-sm font-sans uppercase tracking-[0.2em] text-gray-400 font-medium">Seasonal Selection</span>
-                </h3>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+                <div className="flex items-center gap-6 mb-12">
+                  <h3 className="text-4xl font-serif text-lenoir-burgundy flex-shrink-0">
+                    {category === 'Drink' ? 'Signature Cocktails' : `${category}s`}
+                  </h3>
+                  <div className="h-px bg-lenoir-gold/20 flex-grow"></div>
+                </div>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12">
                   {MENU_ITEMS.filter(item => item.category === category).map((item, idx) => (
-                    <div key={idx} className="group cursor-default">
-                      <div className="aspect-[3/2] overflow-hidden mb-6 bg-gray-50">
+                    <div key={idx} className="group cursor-pointer">
+                      <div className="aspect-square overflow-hidden mb-8 bg-gray-50 rounded-sm shadow-sm">
                         <img 
                           src={item.imageUrl} 
                           alt={item.name} 
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                          className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000"
                         />
                       </div>
-                      <h4 className="font-serif text-2xl mb-2 group-hover:text-lenoir-burgundy transition-colors">{item.name}</h4>
-                      <p className="text-gray-500 font-light text-sm">{item.description}</p>
+                      <div className="flex justify-between items-start mb-3">
+                        <h4 className="font-serif text-2xl group-hover:text-lenoir-gold transition-colors leading-tight">{item.name}</h4>
+                        <span className="font-serif text-xl text-lenoir-burgundy italic">{item.price}</span>
+                      </div>
+                      <p className="text-gray-500 font-light text-sm leading-relaxed">{item.description}</p>
                     </div>
                   ))}
                 </div>
@@ -124,60 +168,80 @@ const App: React.FC = () => {
             ))}
           </div>
 
-          <div className="mt-20 text-center">
-             <button className="bg-lenoir-dark text-white px-10 py-4 text-xs uppercase tracking-widest font-bold hover:bg-lenoir-gold hover:text-lenoir-dark transition-all">
-                Download Full Menu PDF
+          <div className="mt-32 text-center">
+             <button className="inline-flex items-center gap-4 bg-lenoir-dark text-white px-12 py-5 text-xs uppercase tracking-[0.3em] font-black hover:bg-lenoir-gold hover:text-lenoir-dark transition-all transform hover:-translate-y-1 shadow-2xl">
+                <span>Download Full Menu PDF</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
              </button>
+             <p className="mt-6 text-[10px] text-gray-400 uppercase tracking-widest">Extensive wine list available in-house</p>
           </div>
         </div>
       </section>
 
       {/* Wine Club CTA */}
-      <section id="wine-club" className="relative py-32 bg-lenoir-dark text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-30">
-          <img src="https://picsum.photos/seed/wine-cellar/1920/800" alt="Wine Garden" className="w-full h-full object-cover" />
+      <section id="wine-club" className="relative py-40 bg-lenoir-dark text-white overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b0ca7df?auto=format&fit=crop&w=1920&q=80" alt="Wine Bottles" className="w-full h-full object-cover opacity-20 scale-110" />
+          <div className="absolute inset-0 bg-gradient-to-r from-lenoir-dark via-lenoir-dark/80 to-transparent"></div>
         </div>
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <span className="text-lenoir-gold text-xs uppercase tracking-widest font-bold block mb-6">Experience at Home</span>
-          <h2 className="text-5xl md:text-6xl font-serif mb-8 italic">Lenoir Wine Club</h2>
-          <p className="text-xl font-light leading-relaxed mb-12 text-gray-300">
-            A monthly curated selection featuring seasonal sips, rare finds, and bottles with compelling stories. Support independent winemakers and local producers with every glass.
-          </p>
-          <button className="bg-lenoir-gold text-lenoir-dark px-12 py-5 text-xs uppercase tracking-[0.2em] font-bold hover:bg-white transition-all">
-            Join the Wine Club
-          </button>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
+          <div>
+            <span className="text-lenoir-gold text-xs uppercase tracking-[0.5em] font-black block mb-8">Curated Experiences</span>
+            <h2 className="text-6xl md:text-8xl font-serif mb-10 leading-tight">Lenoir <span className="italic text-lenoir-gold/80 block">Wine Club</span></h2>
+            <p className="text-xl font-light leading-relaxed mb-12 text-gray-300 font-serif italic max-w-xl">
+              Bring the Lenoir experience home. Our monthly club features rare finds from independent producers with compelling stories, hand-selected by our sommelier team.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6">
+              <button className="bg-lenoir-gold text-lenoir-dark px-12 py-5 text-xs uppercase tracking-[0.2em] font-black hover:bg-white transition-all transform hover:-translate-y-1 shadow-2xl">
+                Join the Wine Club
+              </button>
+              <button className="border border-white/20 px-12 py-5 text-xs uppercase tracking-[0.2em] font-black hover:bg-white hover:text-lenoir-dark transition-all transform hover:-translate-y-1">
+                Gift a Membership
+              </button>
+            </div>
+          </div>
+          <div className="hidden lg:block relative">
+            <div className="aspect-square bg-lenoir-gold/5 p-8 rounded-full border border-lenoir-gold/10 animate-spin-slow">
+              <div className="w-full h-full rounded-full border border-lenoir-gold/20 p-8">
+                <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80" alt="Sommelier" className="w-full h-full object-cover rounded-full shadow-2xl" />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Events Section */}
-      <section id="events" className="py-24 bg-lenoir-earth">
+      <section id="events" className="py-32 bg-lenoir-earth">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-12">
             <div className="max-w-2xl">
-              <span className="text-lenoir-burgundy text-xs uppercase tracking-widest font-bold">Gatherings</span>
-              <h2 className="text-5xl font-serif text-lenoir-dark mt-4">Events & Special Nights</h2>
-              <p className="mt-6 text-gray-600 font-light leading-relaxed">
-                Lenoir hosts a vibrant calendar of seasonal wine dinners, community celebrations, and themed nights in our wine garden.
+              <span className="text-lenoir-burgundy text-xs uppercase tracking-[0.4em] font-black">Community & Culture</span>
+              <h2 className="text-6xl font-serif text-lenoir-dark mt-6 italic">Special Nights</h2>
+              <p className="mt-8 text-xl text-gray-600 font-light leading-relaxed font-serif">
+                From intimate wine dinners with visiting winemakers to our legendary Beefsteak celebrations.
               </p>
             </div>
-            <button className="text-lenoir-burgundy text-xs uppercase tracking-widest font-bold border-b border-lenoir-burgundy pb-2 hover:text-lenoir-gold hover:border-lenoir-gold transition-all">
-              View All Events
+            <button className="group flex items-center gap-4 text-lenoir-burgundy text-xs uppercase tracking-[0.3em] font-black pb-2 border-b-2 border-lenoir-burgundy/20 hover:border-lenoir-burgundy transition-all">
+              <span>Explore All Events</span>
+              <svg className="w-4 h-4 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
             </button>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid lg:grid-cols-3 gap-12">
             {EVENTS.map((event, idx) => (
-              <div key={idx} className="bg-white group shadow-sm hover:shadow-xl transition-all">
-                <div className="aspect-video overflow-hidden">
-                  <img src={event.imageUrl} alt={event.title} className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500" />
+              <div key={idx} className="group relative overflow-hidden bg-white shadow-2xl rounded-sm transition-all duration-500 hover:-translate-y-2">
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img src={event.imageUrl} alt={event.title} className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000 opacity-90 group-hover:opacity-100" />
                 </div>
-                <div className="p-8">
-                  <h3 className="text-2xl font-serif mb-3">{event.title}</h3>
-                  <p className="text-gray-500 text-sm font-light mb-6 leading-relaxed">
+                <div className="p-10">
+                  <span className="text-lenoir-gold text-[10px] uppercase tracking-[0.3em] font-black mb-4 block">Limited Seating</span>
+                  <h3 className="text-3xl font-serif mb-4 leading-tight group-hover:text-lenoir-burgundy transition-colors">{event.title}</h3>
+                  <p className="text-gray-500 text-sm font-light mb-8 leading-relaxed italic font-serif">
                     {event.description}
                   </p>
-                  <button className="text-xs uppercase tracking-widest font-bold text-lenoir-gold group-hover:underline underline-offset-4">
-                    Learn More
+                  <button className="text-xs uppercase tracking-widest font-black text-lenoir-dark flex items-center gap-3">
+                    <span>Reserve Spot</span>
+                    <div className="w-6 h-[2px] bg-lenoir-gold"></div>
                   </button>
                 </div>
               </div>
@@ -186,31 +250,73 @@ const App: React.FC = () => {
         </div>
       </section>
 
+      {/* Private Dining Section */}
+      <section id="private-dining" className="py-32 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-24 items-center">
+          <div className="relative group">
+            <div className="aspect-square bg-lenoir-earth p-4 rounded-lg shadow-inner">
+               <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80" alt="Private Garden Event" className="w-full h-full object-cover rounded-md shadow-2xl group-hover:scale-[1.02] transition-transform duration-700" />
+            </div>
+            <div className="absolute -top-10 -right-10 bg-lenoir-gold p-12 rounded-full hidden lg:flex flex-col items-center justify-center text-lenoir-dark shadow-2xl">
+              <span className="text-2xl font-serif italic leading-none">16-65</span>
+              <span className="text-[10px] uppercase tracking-widest font-black mt-1">Guests</span>
+            </div>
+          </div>
+          <div className="space-y-10">
+            <header>
+              <span className="text-lenoir-burgundy text-xs uppercase tracking-[0.4em] font-black mb-4 block">Private Gatherings</span>
+              <h2 className="text-6xl font-serif text-lenoir-dark leading-tight italic">Host With <br/> Purpose</h2>
+            </header>
+            <p className="text-xl font-light text-gray-700 leading-relaxed italic font-serif">
+              From business dinners to wedding receptions, our wine garden and dining room provide a soulful backdrop for your most important celebrations.
+            </p>
+            <div className="space-y-6">
+              <div className="flex items-center gap-4 text-gray-500 font-light">
+                <div className="w-2 h-2 rounded-full bg-lenoir-gold"></div>
+                <p>Tailored Seasonal Menus & Wine Pairings</p>
+              </div>
+              <div className="flex items-center gap-4 text-gray-500 font-light">
+                <div className="w-2 h-2 rounded-full bg-lenoir-gold"></div>
+                <p>Full Restaurant & Garden Buyouts</p>
+              </div>
+              <div className="flex items-center gap-4 text-gray-500 font-light">
+                <div className="w-2 h-2 rounded-full bg-lenoir-gold"></div>
+                <p>Dedicated Event Planning Team</p>
+              </div>
+            </div>
+            <button className="bg-lenoir-dark text-white px-12 py-5 text-xs uppercase tracking-[0.3em] font-black hover:bg-lenoir-gold hover:text-lenoir-dark transition-all transform hover:-translate-y-1 shadow-2xl w-full sm:w-auto">
+              Inquire About Private Dining
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* CSR & Community Section */}
-      <section className="py-24 bg-white">
+      <section className="py-32 bg-lenoir-earth border-t border-lenoir-gold/10">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-             <span className="text-lenoir-burgundy text-xs uppercase tracking-widest font-bold">Community Support</span>
-             <h2 className="text-5xl font-serif text-lenoir-dark mt-4">CSR Membership</h2>
-             <p className="mt-6 text-gray-600 font-light max-w-2xl mx-auto">
-               Become a part of the Lenoir community. Enjoy priority access, special event bookings, and unique rewards while supporting our mission.
+          <div className="text-center mb-24 max-w-3xl mx-auto">
+             <span className="text-lenoir-burgundy text-xs uppercase tracking-[0.4em] font-black">Sustainability & Support</span>
+             <h2 className="text-6xl font-serif text-lenoir-dark mt-6 mb-8 underline decoration-lenoir-gold/20 underline-offset-8">Community Support</h2>
+             <p className="text-xl text-gray-600 font-light italic font-serif">
+               Join our mission to support local agricultural cycles. Our CSR memberships provide unique perks while fueling our commitment to independent Texas producers.
              </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid lg:grid-cols-3 gap-12">
             {CSR_TIERS.map((tier, idx) => (
-              <div key={idx} className={`p-10 border transition-all ${idx === 1 ? 'border-lenoir-gold bg-lenoir-dark text-white scale-105 shadow-2xl' : 'border-gray-100 bg-gray-50 hover:bg-white'}`}>
-                <h3 className={`text-2xl font-serif mb-2 ${idx === 1 ? 'text-lenoir-gold' : 'text-lenoir-dark'}`}>{tier.name}</h3>
-                <div className="text-4xl font-serif mb-8">{tier.price}</div>
-                <ul className="space-y-4 mb-10 text-sm font-light h-48 overflow-y-auto">
+              <div key={idx} className={`relative p-12 group transition-all duration-700 border overflow-hidden ${idx === 1 ? 'border-lenoir-gold bg-lenoir-dark text-white lg:scale-105 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] z-10' : 'border-gray-200 bg-white hover:border-lenoir-gold/50'}`}>
+                {idx === 1 && <div className="absolute top-0 right-0 bg-lenoir-gold text-lenoir-dark px-6 py-2 text-[10px] uppercase tracking-widest font-black">Most Popular</div>}
+                <h3 className={`text-3xl font-serif mb-2 ${idx === 1 ? 'text-lenoir-gold' : 'text-lenoir-dark'}`}>{tier.name}</h3>
+                <div className="text-5xl font-serif mb-10 italic">{tier.price}</div>
+                <ul className="space-y-6 mb-12 min-h-[160px]">
                   {tier.perks.map((perk, pIdx) => (
-                    <li key={pIdx} className="flex items-start gap-3">
-                      <span className="text-lenoir-gold">✦</span>
-                      <span>{perk}</span>
+                    <li key={pIdx} className="flex items-start gap-4">
+                      <span className="text-lenoir-gold mt-1 text-xs">✦</span>
+                      <span className="text-sm font-light leading-snug">{perk}</span>
                     </li>
                   ))}
                 </ul>
-                <button className={`w-full py-4 text-xs uppercase tracking-widest font-bold transition-all ${idx === 1 ? 'bg-lenoir-gold text-lenoir-dark hover:bg-white' : 'bg-lenoir-dark text-white hover:bg-lenoir-gold'}`}>
+                <button className={`w-full py-5 text-xs uppercase tracking-[0.2em] font-black transition-all ${idx === 1 ? 'bg-lenoir-gold text-lenoir-dark hover:bg-white' : 'bg-lenoir-dark text-white hover:bg-lenoir-gold hover:text-lenoir-dark'}`}>
                   {tier.cta}
                 </button>
               </div>
@@ -219,42 +325,25 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* Private Dining Section */}
-      <section id="private-dining" className="py-24 bg-lenoir-dark text-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-16">
-          <div className="md:w-1/2 relative z-10">
-            <span className="text-lenoir-gold text-xs uppercase tracking-widest font-bold mb-6 block">Celebrations</span>
-            <h2 className="text-5xl font-serif mb-8 italic">Host Your Event <br/> With Us</h2>
-            <p className="text-lg font-light text-gray-300 leading-relaxed mb-8">
-              Lenoir’s restaurant and wine garden are available for private gatherings, business dinners, celebrations, and wedding receptions. With a capacity of 16–65 guests, tailored menus, and beautiful ambiance, it’s the perfect place to host unforgettable events.
-            </p>
-            <button className="border border-lenoir-gold text-lenoir-gold px-10 py-4 text-xs uppercase tracking-widest font-bold hover:bg-lenoir-gold hover:text-lenoir-dark transition-all">
-              Inquire About Private Dining
-            </button>
-          </div>
-          <div className="md:w-1/2 relative">
-            <div className="aspect-square bg-lenoir-gold/20 p-4">
-               <img src="https://picsum.photos/seed/private-event/800/800" alt="Private Dining" className="w-full h-full object-cover shadow-2xl" />
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Testimonials */}
-      <section className="py-24 bg-lenoir-earth">
+      <section className="py-32 bg-white relative">
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-lenoir-gold/30 to-transparent"></div>
         <div className="max-w-5xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-lenoir-burgundy text-xs uppercase tracking-widest font-bold italic">Kind Words</span>
+          <div className="text-center mb-24">
+            <span className="text-lenoir-burgundy text-xs uppercase tracking-[0.5em] font-black italic">Kind Words</span>
           </div>
-          <div className="grid md:grid-cols-3 gap-12">
+          <div className="grid lg:grid-cols-3 gap-16 relative">
             {TESTIMONIALS.map((t, idx) => (
-              <div key={idx} className="text-center">
-                <div className="text-4xl text-lenoir-gold mb-6 font-serif">“</div>
-                <p className="text-lg font-serif italic text-lenoir-dark mb-6 leading-relaxed">
+              <div key={idx} className="text-center group">
+                <div className="text-6xl text-lenoir-gold/30 mb-8 font-serif group-hover:text-lenoir-gold/60 transition-colors">“</div>
+                <p className="text-2xl font-serif italic text-lenoir-dark mb-10 leading-relaxed group-hover:scale-105 transition-transform">
                   {t.quote}
                 </p>
-                <div className="uppercase tracking-[0.2em] text-[10px] font-bold text-gray-500">
-                  {t.author} — {t.source}
+                <div className="inline-block py-2 px-4 border-l border-lenoir-gold">
+                  <div className="uppercase tracking-[0.3em] text-[10px] font-black text-lenoir-burgundy">
+                    {t.author}
+                  </div>
+                  <div className="text-[9px] uppercase tracking-widest text-gray-400 mt-1 font-bold">{t.source}</div>
                 </div>
               </div>
             ))}
@@ -263,67 +352,65 @@ const App: React.FC = () => {
       </section>
 
       {/* Visit Us Section */}
-      <section id="visit" className="py-24 bg-white border-t border-gray-50">
+      <section id="visit" className="py-32 bg-lenoir-earth overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-20">
-            <div>
-              <span className="text-lenoir-burgundy text-xs uppercase tracking-widest font-bold mb-6 block">Location & Hours</span>
-              <h2 className="text-5xl font-serif text-lenoir-dark mb-10">Visit Us</h2>
+          <div className="grid lg:grid-cols-2 gap-24 items-center">
+            <div className="space-y-16">
+              <header>
+                <span className="text-lenoir-burgundy text-xs uppercase tracking-[0.4em] font-black mb-4 block">South Austin Landmark</span>
+                <h2 className="text-7xl font-serif text-lenoir-dark italic leading-none">Visit Us</h2>
+              </header>
               
-              <div className="space-y-10">
-                <div className="flex gap-6">
-                  <div className="text-lenoir-gold mt-1">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                  </div>
-                  <div>
-                    <h4 className="text-xs uppercase tracking-widest font-bold mb-2 text-gray-400">Address</h4>
-                    <p className="text-lg text-gray-800">1807 S. First Street,<br/> Austin, Texas 78704</p>
-                  </div>
+              <div className="grid sm:grid-cols-2 gap-12">
+                <div className="space-y-4">
+                  <h4 className="text-[10px] uppercase tracking-[0.4em] font-black text-lenoir-gold">Location</h4>
+                  <p className="text-2xl font-serif text-gray-800 leading-tight">1807 S. First Street,<br/> Austin, Texas 78704</p>
                 </div>
 
-                <div className="flex gap-6">
-                  <div className="text-lenoir-gold mt-1">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                  </div>
-                  <div>
-                    <h4 className="text-xs uppercase tracking-widest font-bold mb-2 text-gray-400">Hours</h4>
-                    <ul className="text-lg text-gray-800 space-y-1">
-                      <li>Sunday – Thursday: 4:30 PM – 10:00 PM</li>
-                      <li>Friday – Saturday: 4:30 PM – 10:30 PM</li>
-                      <li className="text-lenoir-burgundy font-medium italic">Closed Tuesdays</li>
-                    </ul>
-                  </div>
+                <div className="space-y-4">
+                  <h4 className="text-[10px] uppercase tracking-[0.4em] font-black text-lenoir-gold">Reservations</h4>
+                  <p className="text-2xl font-serif text-gray-800">(512) 215-9778</p>
+                  <p className="text-sm font-light text-lenoir-burgundy underline underline-offset-4 cursor-pointer">Email our Concierge</p>
                 </div>
 
-                <div className="flex gap-6">
-                  <div className="text-lenoir-gold mt-1">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                  </div>
-                  <div>
-                    <h4 className="text-xs uppercase tracking-widest font-bold mb-2 text-gray-400">Contact</h4>
-                    <p className="text-lg text-gray-800">(512) 215-9778</p>
-                    <p className="text-gray-500 font-light underline">reservations@lenoirrestaurant.com</p>
+                <div className="space-y-4 sm:col-span-2">
+                  <h4 className="text-[10px] uppercase tracking-[0.4em] font-black text-lenoir-gold">Hours</h4>
+                  <div className="grid grid-cols-2 gap-8">
+                    <div className="space-y-1">
+                      <p className="text-xs uppercase tracking-widest text-gray-400 font-bold">Dinner</p>
+                      <p className="text-lg font-serif">Sun – Thu: 4:30 – 10:00</p>
+                      <p className="text-lg font-serif">Fri – Sat: 4:30 – 10:30</p>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-xs uppercase tracking-widest text-gray-400 font-bold">Holiday</p>
+                      <p className="text-lg font-serif italic text-lenoir-burgundy font-bold uppercase tracking-tighter">Closed Tuesdays</p>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-12 flex gap-4">
-                <button className="bg-lenoir-dark text-white px-8 py-4 text-xs uppercase tracking-widest font-bold hover:bg-lenoir-gold hover:text-lenoir-dark transition-all">
-                  Reserve Now
+              <div className="flex flex-col sm:flex-row gap-6">
+                <button className="bg-lenoir-dark text-white px-12 py-5 text-xs uppercase tracking-[0.2em] font-black hover:bg-lenoir-gold hover:text-lenoir-dark transition-all transform hover:-translate-y-1 shadow-2xl">
+                  Reserve via Resy
                 </button>
-                <button className="border border-gray-200 text-gray-600 px-8 py-4 text-xs uppercase tracking-widest font-bold hover:border-lenoir-gold hover:text-lenoir-gold transition-all">
+                <button className="border border-lenoir-dark/10 text-lenoir-dark px-12 py-5 text-xs uppercase tracking-[0.2em] font-black hover:bg-white transition-all transform hover:-translate-y-1">
                   Get Directions
                 </button>
               </div>
             </div>
 
-            <div className="bg-gray-100 rounded-sm overflow-hidden h-[500px] shadow-inner flex items-center justify-center relative">
-              <img src="https://picsum.photos/seed/austin-map/800/800" alt="Austin Map Placeholder" className="w-full h-full object-cover opacity-50 grayscale" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                 <div className="bg-white/90 backdrop-blur-sm p-6 text-center shadow-xl border border-lenoir-gold/20">
-                    <span className="text-lenoir-burgundy text-xl font-serif italic mb-2 block">Our Garden Awaits</span>
-                    <p className="text-xs uppercase tracking-widest text-gray-500">1807 S. First Street</p>
-                 </div>
+            <div className="relative group">
+              <div className="aspect-square bg-white shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)] p-4 rounded-xl rotate-2 group-hover:rotate-0 transition-all duration-1000">
+                <div className="w-full h-full rounded-lg overflow-hidden relative">
+                  <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=80" alt="Austin Skyline" className="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-2000" />
+                  <div className="absolute inset-0 bg-lenoir-burgundy/10 group-hover:bg-transparent transition-colors"></div>
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <div className="bg-white/95 backdrop-blur-sm p-8 text-center shadow-2xl rounded-sm border border-lenoir-gold/20 min-w-[240px]">
+                      <span className="text-lenoir-burgundy text-3xl font-serif italic mb-2 block">Our Garden Awaits</span>
+                      <p className="text-[10px] uppercase tracking-[0.4em] text-gray-500 font-black">S. First District</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -331,17 +418,20 @@ const App: React.FC = () => {
       </section>
 
       {/* Newsletter Signup */}
-      <section className="py-24 bg-lenoir-earth">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-serif text-lenoir-dark mb-4 italic">Stay In the Loop</h2>
-          <p className="text-gray-600 font-light mb-10">Sign up for the latest news, seasonal menus, and upcoming events.</p>
-          <form className="flex flex-col sm:flex-row gap-0 group">
+      <section className="py-40 bg-lenoir-dark text-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-lenoir-gold/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+          <header className="mb-16">
+            <h2 className="text-6xl font-serif mb-6 italic leading-tight">Stay In the <span className="text-lenoir-gold">Loop</span></h2>
+            <p className="text-xl text-gray-400 font-light font-serif italic max-w-xl mx-auto">Sign up for first access to wine dinners, seasonal menu changes, and garden events.</p>
+          </header>
+          <form className="max-w-xl mx-auto relative group">
             <input 
               type="email" 
-              placeholder="Email Address" 
-              className="flex-grow px-6 py-4 bg-white border border-gray-200 focus:outline-none focus:border-lenoir-gold transition-all"
+              placeholder="Your email address" 
+              className="w-full px-10 py-6 bg-white/5 border border-white/10 text-white placeholder-white/30 font-light focus:outline-none focus:border-lenoir-gold transition-all text-lg font-serif italic"
             />
-            <button className="bg-lenoir-dark text-white px-10 py-4 text-xs uppercase tracking-[0.2em] font-bold hover:bg-lenoir-gold hover:text-lenoir-dark transition-all">
+            <button className="absolute right-2 top-2 bottom-2 bg-lenoir-gold text-lenoir-dark px-10 text-xs uppercase tracking-[0.3em] font-black hover:bg-white transition-all">
               Subscribe
             </button>
           </form>
@@ -349,51 +439,64 @@ const App: React.FC = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-lenoir-dark text-gray-400 py-20 border-t border-white/5">
+      <footer className="bg-lenoir-dark text-gray-400 py-32 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-12 mb-16">
-            <div className="col-span-1 md:col-span-2">
-              <h3 className="text-3xl font-serif text-lenoir-gold tracking-widest uppercase mb-6">Lenoir</h3>
-              <p className="text-sm font-light leading-relaxed max-w-sm">
-                A tribute to the land's bounty. Exceptional seasonal dining and curated wine experiences in the heart of Austin, Texas.
+          <div className="grid lg:grid-cols-12 gap-20 mb-32">
+            <div className="lg:col-span-5">
+              <a href="#" className="text-4xl font-serif text-lenoir-gold tracking-widest uppercase mb-8 block">Lenoir</a>
+              <p className="text-lg font-serif italic text-gray-400 leading-relaxed max-w-sm mb-12">
+                Named after a hearty grape growing across the Texas Hill Country — a tribute to the land’s resilience and bounty.
               </p>
-              <div className="flex gap-6 mt-8">
-                <a href="#" className="hover:text-lenoir-gold transition-colors">
-                  <span className="text-xs uppercase tracking-widest font-bold">Instagram</span>
+              <div className="flex gap-10">
+                <a href="#" className="text-[10px] uppercase tracking-[0.4em] font-black text-white hover:text-lenoir-gold transition-colors flex items-center gap-3">
+                  <div className="w-4 h-[1px] bg-lenoir-gold"></div>
+                  <span>Instagram</span>
                 </a>
-                <a href="#" className="hover:text-lenoir-gold transition-colors">
-                  <span className="text-xs uppercase tracking-widest font-bold">Facebook</span>
+                <a href="#" className="text-[10px] uppercase tracking-[0.4em] font-black text-white hover:text-lenoir-gold transition-colors flex items-center gap-3">
+                  <div className="w-4 h-[1px] bg-lenoir-gold"></div>
+                  <span>Facebook</span>
                 </a>
               </div>
             </div>
             
-            <div>
-              <h4 className="text-white text-xs uppercase tracking-[0.2em] font-bold mb-6">Quick Links</h4>
-              <ul className="space-y-3 text-sm font-light">
-                <li><a href="#about" className="hover:text-white transition-colors">About</a></li>
-                <li><a href="#menu" className="hover:text-white transition-colors">Menu</a></li>
-                <li><a href="#wine-club" className="hover:text-white transition-colors">Wine Club</a></li>
-                <li><a href="#events" className="hover:text-white transition-colors">Events</a></li>
-                <li><a href="#private-dining" className="hover:text-white transition-colors">Private Dining</a></li>
-                <li><a href="#visit" className="hover:text-white transition-colors">CSR Membership</a></li>
-              </ul>
-            </div>
+            <div className="lg:col-span-7 grid sm:grid-cols-3 gap-12">
+              <div className="space-y-8">
+                <h4 className="text-white text-[10px] uppercase tracking-[0.5em] font-black mb-8">Cuisine</h4>
+                <ul className="space-y-4 text-sm font-light italic font-serif">
+                  <li><a href="#about" className="hover:text-lenoir-gold transition-colors">Our Story</a></li>
+                  <li><a href="#menu" className="hover:text-lenoir-gold transition-colors">Current Menu</a></li>
+                  <li><a href="#wine-club" className="hover:text-lenoir-gold transition-colors">Wine Club</a></li>
+                  <li><a href="#visit" className="hover:text-lenoir-gold transition-colors">Location</a></li>
+                </ul>
+              </div>
 
-            <div>
-              <h4 className="text-white text-xs uppercase tracking-[0.2em] font-bold mb-6">Contact</h4>
-              <ul className="space-y-3 text-sm font-light">
-                <li>(512) 215-9778</li>
-                <li>reservations@lenoirrestaurant.com</li>
-                <li className="text-gray-500 mt-6">1807 S. First Street<br/>Austin, TX 78704</li>
-              </ul>
+              <div className="space-y-8">
+                <h4 className="text-white text-[10px] uppercase tracking-[0.5em] font-black mb-8">Hospitality</h4>
+                <ul className="space-y-4 text-sm font-light italic font-serif">
+                  <li><a href="#events" className="hover:text-lenoir-gold transition-colors">Events</a></li>
+                  <li><a href="#private-dining" className="hover:text-lenoir-gold transition-colors">Private Events</a></li>
+                  <li><a href="#" className="hover:text-lenoir-gold transition-colors">Gift Cards</a></li>
+                  <li><a href="#" className="hover:text-lenoir-gold transition-colors">CSR Membership</a></li>
+                </ul>
+              </div>
+
+              <div className="space-y-8">
+                <h4 className="text-white text-[10px] uppercase tracking-[0.5em] font-black mb-8">Contact</h4>
+                <ul className="space-y-4 text-sm font-light italic font-serif">
+                  <li>1807 S. First Street<br/>Austin, TX 78704</li>
+                  <li>(512) 215-9778</li>
+                  <li>reservations@lenoirrestaurant.com</li>
+                </ul>
+              </div>
             </div>
           </div>
           
-          <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] uppercase tracking-widest font-medium">
-            <p>&copy; 2024 Lenoir Restaurant. All Rights Reserved.</p>
-            <div className="flex gap-8">
-              <a href="#" className="hover:text-white">Privacy Policy</a>
-              <a href="#" className="hover:text-white">Terms of Service</a>
+          <div className="pt-16 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8 text-[9px] uppercase tracking-[0.4em] font-black text-gray-500">
+            <p>&copy; 2024 Lenoir Restaurant Group. Crafted in Austin, TX.</p>
+            <div className="flex gap-12">
+              <a href="#" className="hover:text-white transition-colors">Privacy</a>
+              <a href="#" className="hover:text-white transition-colors">Terms</a>
+              <a href="#" className="hover:text-white transition-colors">Accessibility</a>
             </div>
           </div>
         </div>

@@ -1,35 +1,84 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" className="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lenoir Restaurant — Exceptional Seasonal Dining</title>
+    <title>Lenoir Restaurant — Exceptional Seasonal Dining & Wine</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@200;300;400;600;900&display=swap" rel="stylesheet">
     <style>
+      :root {
+        --lenoir-gold: #c4a06d;
+        --lenoir-dark: #1a1512;
+        --lenoir-earth: #fdfaf6;
+        --lenoir-burgundy: #5c1b1b;
+      }
       body {
         font-family: 'Montserrat', sans-serif;
+        background-color: var(--lenoir-dark);
       }
       h1, h2, h3, h4, .font-serif {
         font-family: 'Cormorant Garamond', serif;
       }
-      .bg-lenoir-dark { background-color: #1a1512; }
-      .text-lenoir-gold { color: #c4a06d; }
-      .border-lenoir-gold { border-color: #c4a06d; }
-      .bg-lenoir-earth { background-color: #fdfaf6; }
-      .text-lenoir-burgundy { color: #5c1b1b; }
+      .bg-lenoir-dark { background-color: var(--lenoir-dark); }
+      .text-lenoir-gold { color: var(--lenoir-gold); }
+      .border-lenoir-gold { border-color: var(--lenoir-gold); }
+      .bg-lenoir-earth { background-color: var(--lenoir-earth); }
+      .text-lenoir-burgundy { color: var(--lenoir-burgundy); }
+      .bg-lenoir-gold { background-color: var(--lenoir-gold); }
+      .border-lenoir-burgundy { border-color: var(--lenoir-burgundy); }
+
+      @keyframes slow-zoom {
+        0% { transform: scale(1); }
+        100% { transform: scale(1.15); }
+      }
+      .animate-slow-zoom {
+        animation: slow-zoom 30s infinite alternate ease-in-out;
+      }
+
+      @keyframes float {
+        0% { transform: translateY(0) rotate(3deg); }
+        50% { transform: translateY(-15px) rotate(1deg); }
+        100% { transform: translateY(0) rotate(3deg); }
+      }
+      .animate-float {
+        animation: float 6s infinite ease-in-out;
+      }
+
+      @keyframes spin-slow {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      .animate-spin-slow {
+        animation: spin-slow 20s linear infinite;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--lenoir-dark);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--lenoir-gold);
+      }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/"
-  }
-}
-</script>
-</head>
+    <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@^19.2.3",
+        "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+        "react/": "https://esm.sh/react@^19.2.3/"
+      }
+    }
+    </script>
+  </head>
   <body>
     <div id="root"></div>
   </body>
